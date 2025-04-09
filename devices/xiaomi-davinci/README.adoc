@@ -1,0 +1,2 @@
+= Xiaomi Mi 9T / Redmi K20
+include::_support/common.inc[]

@@ -7,7 +7,7 @@ let
     mkMerge
     mkOption
     types
-  ;
+    ;
   cfg = config.mobile.hardware.socs;
   anyQualcomm = lib.any (v: v) [
     cfg.qualcomm-msm8940.enable
@@ -19,6 +19,7 @@ let
     cfg.qualcomm-sdm660.enable
     cfg.qualcomm-sdm845.enable
     cfg.qualcomm-sm6125.enable
+    cfg.qualcomm-sm7150.enable
     cfg.qualcomm-apq8064-1aa.enable
   ];
 in
@@ -74,6 +75,11 @@ in
       default = false;
       description = "enable when SOC is SM6125";
     };
+    hardware.socs.qualcomm-sm7150.enable = mkOption {
+      type = types.bool;
+      default = false;
+      description = "enable when SOC is SM7150";
+    };
   };
 
   config = mkMerge [
@@ -124,16 +130,23 @@ in
       };
     }
     {
+      mobile = mkIf cfg.qualcomm-sm7150.enable {
+        system.system = "aarch64-linux";
+      };
+    }
+    {
       mobile = mkIf cfg.qualcomm-apq8064-1aa.enable {
         system.system = "armv7l-linux";
       };
     }
     (mkIf anyQualcomm {
       mobile.kernel.structuredConfig = [
-        (helpers: with helpers; {
-          ARCH_QCOM = lib.mkDefault (whenAtLeast "4.1" yes);
-          ARCH_MSM = lib.mkDefault (whenOlder "4.1" yes);
-        })
+        (
+          helpers: with helpers; {
+            ARCH_QCOM = lib.mkDefault (whenAtLeast "4.1" yes);
+            ARCH_MSM = lib.mkDefault (whenOlder "4.1" yes);
+          }
+        )
       ];
     })
   ];
