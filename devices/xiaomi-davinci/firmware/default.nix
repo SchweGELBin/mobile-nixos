@@ -8,8 +8,8 @@ let
   baseFw = fetchFromGitHub {
     owner = "sm7150-mainline";
     repo = "firmware-xiaomi-davinci";
-    rev = "d2db810c4a040cc71a6c67d0500158ed29fee678";
-    sha256 = "sha256-GXEMMYaqrdT8mZlMD/H12017vNaiRNB34m9EoJG2or8=";
+    rev = "6532694920dd05ee7d930fe6d3ede74d2b9ea60d";
+    sha256 = "sha256-VfGFxKJ3oIXiLfZiw8NkK4adPfVTFPj5236HR3YsNew=";
   };
 in
 runCommand "xiaomi-sm7150-firmware"
