@@ -9,8 +9,8 @@ mobile-nixos.kernel-builder {
   src = fetchFromGitHub {
     owner = "sm7150-mainline";
     repo = "linux";
-    tag = "v6.16.0_rc3";
-    hash = "sha256-KJfHY7pksy+1jTkvE3KC2AAAHcdVHlCfHhv412ixbcc=";
+    tag = "v6.18.0";
+    hash = "sha256-3D3btHX/O9S+bVihW4TvWfZEdrVLLrxnHqf2aVU2ooc=";
   };
-  version = "6.16.0-rc3";
+  version = "6.18.0";
 }
